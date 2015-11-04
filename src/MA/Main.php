@@ -8,6 +8,7 @@ use pocketmine\Player;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\player\PlayerPreLoginEvent;
+use MA\commands\AddMoneyCommand;
 
 class Main extends PluginBase implements Listener{
 
@@ -18,7 +19,13 @@ $this->getServer()->getLogger()->info("[MoneyAPI]Loaded!");
 
 $this->getServer()->getPluginManager()->registerEvents($this,$this);
 @mkdir($this->getDataFolder());
-@mkdir($this->getDataFolder()."Players/");	
+@mkdir($this->getDataFolder()."Players/");
+
+$this->getLogger->info("Loading plugin...");
+$this->getCommand("addMoney")->setExecutor(new AddMoneyCommand($this));
+// More command coming soon...
+// Eventlistener coming soon...
+$this->getLogger()->info("Loaded Succesfully");
 }
 ////////////////MONEY////////////////
 public function addMoney(Player $p, $amount){
